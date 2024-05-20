@@ -40,8 +40,8 @@ class AuthService
             console.log("AuthService :: createAccount :: ", error)
         }
 
-        // return null if account not created
-        return null
+        // return false if account not created
+        return false
     }
 
     // method to login
@@ -55,7 +55,7 @@ class AuthService
         {
             console.log("AuthService :: login :: ", error)
         }
-        return null
+        return false
     }
 
     // method to logout
@@ -69,7 +69,7 @@ class AuthService
         {
             console.log("AuthService :: logout :: ", error)
         }
-        return null
+        return false
     }
 
     // method to get current user
@@ -83,7 +83,7 @@ class AuthService
         {
             console.log("AuthService :: getCurrentUser :: ", error)
         }
-        return null
+        return false
     }
 
 }
