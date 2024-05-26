@@ -21,6 +21,7 @@ class AuthService
         catch(error)
         {
             console.log("AuthService :: constructor :: ", error)
+            throw error
         }
     }
 
@@ -33,15 +34,13 @@ class AuthService
             // can generate errors
             const user = await this.account.create(ID.unique(), email, password, name)
             // logging in and returning session
-            return login({email, password})
+            return this.login({email, password})
         }
         catch(error)
         {
             console.log("AuthService :: createAccount :: ", error)
+            throw error
         }
-
-        // return false if account not created
-        return false
     }
 
     // method to login
@@ -54,8 +53,8 @@ class AuthService
         catch(error)
         {
             console.log("AuthService :: login :: ", error)
+            throw error
         }
-        return false
     }
 
     // method to logout
@@ -68,8 +67,8 @@ class AuthService
         catch(error)
         {
             console.log("AuthService :: logout :: ", error)
+            throw error
         }
-        return false
     }
 
     // method to get current user
@@ -82,8 +81,8 @@ class AuthService
         catch(error)
         {
             console.log("AuthService :: getCurrentUser :: ", error)
+            throw error
         }
-        return false
     }
 
 }
