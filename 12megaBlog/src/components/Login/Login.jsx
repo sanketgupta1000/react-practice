@@ -8,6 +8,7 @@ import { login } from "../../slices"
 import { useDispatch } from "react-redux"
 import { useForm } from "react-hook-form"
 import { InputField, Button, Logo } from '../index'
+import { setLoading } from '../../slices'
 
 function Login() {
 
@@ -21,6 +22,8 @@ function Login() {
     const handleLogin = async (data) => {
         // remove errors
         setError("")
+        // set the loading state
+        dispatch(setLoading({ loading: true, loadingMsg: "Logging in..." }))
         try {
             // login
             const session = await authService.login(data)
@@ -38,6 +41,8 @@ function Login() {
         catch (error) {
             setError(error.message)
         }
+        // remove loading state
+        dispatch(setLoading({ loading: false, loadingMsg: "" }))
     }
 
     return (

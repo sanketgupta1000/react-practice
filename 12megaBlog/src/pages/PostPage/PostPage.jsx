@@ -3,10 +3,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import {blogService} from "./../../services";
 import { Button, Container } from "../../components";
 import parse from "html-react-parser";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setLoading } from "../../slices";
 
 export default function Post() {
 
+    const dispatch = useDispatch();
     // state for post data
     const [post, setPost] = useState(null);
 
@@ -21,6 +23,9 @@ export default function Post() {
     // fetching
     useEffect(() =>
     {
+        // set loading state
+        dispatch(setLoading({loading: true, loadingMsg: "Fetching post..."}));
+
         if (postId)
         {
             blogService.getPost(postId)
@@ -28,15 +33,24 @@ export default function Post() {
                 {
                     if (post) setPost(post);
                     else navigate("/");
+                    dispatch(setLoading({loading: false, loadingMsg: ""}));
                 }
             );
         }
-        else navigate("/");
+        else
+        {
+            // remove loading state
+            dispatch(setLoading({loading: false, loadingMsg: ""}));
+            navigate("/");
+        }
     }, [postId, navigate]);
 
     // callback for deleting
     const deletePost = () =>
     {
+        // set loading state
+        dispatch(setLoading({loading: true, loadingMsg: "Deleting post..."}));
+
         blogService.deletePost(post.$id).then((status) => {
             if (status)
             {
@@ -45,6 +59,9 @@ export default function Post() {
                 navigate("/");
             }
         });
+
+        // remove loading state
+        dispatch(setLoading({loading: false, loadingMsg: ""}));
     };
 
     return post ? (

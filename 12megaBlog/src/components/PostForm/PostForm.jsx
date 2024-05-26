@@ -5,12 +5,16 @@ import { blogService } from '../../services'
 import { InputField, Button, Logo, TextEditor, SelectInput } from '../index'
 import { useSelector } from 'react-redux'
 import { useCallback } from 'react'
+import { setLoading } from '../../slices'
+import { useDispatch } from 'react-redux'
 
 
 // will use same component for updating as well as creating a post
 // if post given, it is for updating, else for creating
 function PostForm({post})
 {
+
+    const dispatch = useDispatch()
 
     const navigate = useNavigate()
     // getting user data
@@ -28,6 +32,9 @@ function PostForm({post})
     // submit handler for post form
     const handlePostSubmit = async(data) => 
     {
+
+        // set loading state
+        dispatch(setLoading({loading: true, loadingMsg: "Submitting Post..."}))
         
         if(post)
         {
@@ -74,6 +81,9 @@ function PostForm({post})
                 }
             }
         }
+
+        // remove loading state
+        dispatch(setLoading({loading: false, loadingMsg: ""}))
 
     }
 

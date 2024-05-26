@@ -5,6 +5,8 @@ import {useDispatch} from "react-redux"
 import {authService} from "./../../services"
 import {logout} from "./../../slices"
 
+import {setLoading} from "./../../slices"
+
 function LogoutBtn()
 {
 
@@ -13,12 +15,18 @@ function LogoutBtn()
     
     function logoutClickHandler()
     {
+        // set the loading state
+        dispatch(setLoading({loading: true, loadingMsg: "Logging out..."}))
         // logout
         authService.logout()
-            .then(()=>{
-                // dispatch logout action
-                dispatch(logout())
-            })
+        .then(()=>{
+            // dispatch logout action
+            dispatch(logout())
+        })
+        .finally(()=>{
+            // remove loading state
+            dispatch(setLoading({loading: false, loadingMsg: ""}))
+        })
     }
 
     return (

@@ -17,17 +17,20 @@ function AllPostsPage()
     React.useEffect(() =>
     {
         // set loading to true
-        dispatch(setLoading(true))
+        dispatch(setLoading({loading: true, loadingMsg: "Fetching posts..."}))
         // fetching posts
         blogService.getPosts()
         .then((myPosts)=>{
             if(myPosts)
             {
                 // set loading to false
-                dispatch(setLoading(false))
                 // set posts to store
                 dispatch(setPosts(myPosts.documents))
             }
+        })
+        .finally(()=>{
+            // remove loading state
+            dispatch(setLoading({loading: false, loadingMsg: ""}))
         })
     }, [])
 

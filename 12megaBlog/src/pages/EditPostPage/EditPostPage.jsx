@@ -17,7 +17,7 @@ function EditPostPage()
     const [postData, setPostData] = useState(null)
     useEffect(()=>{
         // set loading state
-        dispatch(setLoading(true))
+        dispatch(setLoading({loading: true, loadingMsg: "Fetching post..."}))
         
         blogService.getPost(postId)
         .then((post)=>{
@@ -28,6 +28,10 @@ function EditPostPage()
                 // set in state
                 setPostData(post)
             }
+        })
+        .finally(()=>{
+            // remove loading state
+            dispatch(setLoading({loading: false, loadingMsg: ""}))
         })
     }, [postId])
 

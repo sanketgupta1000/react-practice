@@ -22,7 +22,7 @@ function Home()
         if(isLoggedIn)
         {
             // set loading to true
-            dispatch(setLoading(true))
+            dispatch(setLoading({loading: true, loadingMsg: "Fetching posts..."}))
             // fetching posts
             blogService.getPosts()
             .then((myPosts)=>{
@@ -36,7 +36,10 @@ function Home()
                 }
                 // console.log("outside if")
             })
-            dispatch(setLoading(false))
+            .finally(()=>{
+                // remove loading state
+                dispatch(setLoading({loading: false, loadingMsg: ""}))
+            })
         }
     }, [isLoggedIn])
 

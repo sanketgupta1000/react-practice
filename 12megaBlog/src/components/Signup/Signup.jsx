@@ -5,6 +5,7 @@ import { login } from "../../slices"
 import { useDispatch } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 import { InputField, Button, Logo } from '../index'
+import { setLoading } from "../../slices"
 
 function Signup()
 {
@@ -16,6 +17,10 @@ function Signup()
 
     // signup handler
     const handleSignup = async (data) => {
+
+        // set the loading state
+        dispatch(setLoading({ loading: true, loadingMsg: "Signing up..." }))
+
         // remove errors
         setError("")
 
@@ -37,6 +42,9 @@ function Signup()
         catch (error) {
             setError(error.message)
         }
+
+        // remove loading state
+        dispatch(setLoading({ loading: false, loadingMsg: "" }))
     }
 
     return (

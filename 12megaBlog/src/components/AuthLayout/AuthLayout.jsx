@@ -20,7 +20,7 @@ function AuthLayout({children, authentication=true})
     useEffect(()=>
     {
         // set loading state
-        dispatch(setLoading(true))
+        dispatch(setLoading({loading: true, loadingMsg: "Checking Authentication..."}))
         console.log("before checking")
         // if authentication is required and user is not logged in
         if(authentication && !isLoggedIn)
@@ -39,7 +39,7 @@ function AuthLayout({children, authentication=true})
         console.log("after checking")
         
         // set loading state
-        dispatch(setLoading(false))
+        dispatch(setLoading(false, ""))
         console.log("after checking")
 
     }, [isLoggedIn, navigate])
