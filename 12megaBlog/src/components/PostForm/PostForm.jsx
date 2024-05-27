@@ -127,16 +127,19 @@ function PostForm({post})
                     className="mb-4"
                     {...register("title", { required: true })}
                 />
-                <InputField
-                    label="Slug :"
-                    placeholder="Slug"
-                    className="mb-4"
-                    {...register("slug", { required: true })}
-                    onInput={(e) => {
-                        // if user enters custom slug, transform it first
-                        setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
-                    }}
-                />
+                {/* show slug field only when creating */}
+                {!post && (
+                    <InputField
+                        label="Slug :"
+                        placeholder="Slug"
+                        className="mb-4"
+                        {...register("slug", { required: true })}
+                        onInput={(e) => {
+                            // if user enters custom slug, transform it first
+                            setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
+                        }}
+                    />
+                )}
                 <TextEditor
                     label="Content :"
                     name="content"
