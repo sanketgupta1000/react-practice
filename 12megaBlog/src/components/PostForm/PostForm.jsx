@@ -99,7 +99,8 @@ function PostForm({post})
                 // replace special chars with -
                 .replace(/[^a-zA-Z\d\s]+/g, "-")
                 // replace white spaces with -
-                .replace(/\s/g, "-");
+                .replace(/\s/g, "-")
+                .slice(0, 36)
 
         return "";
     }, []);

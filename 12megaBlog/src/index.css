@@ -1,3 +1,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer utilities {
+    .masonry {
+        column-gap: 1.5em;
+        column-count: 1;
+    }
+    .masonry-sm {
+        column-gap: 1.5em;
+        column-count: 2;
+    }
+    .masonry-md {
+        column-gap: 1.5em;
+        column-count: 3;
+    }
+    .break-inside {
+        break-inside: avoid;
+    }
+}
+
+@layer base {
+    h1 {
+      @apply text-4xl;
+      @apply font-bold;
+    }
+    h2 {
+      @apply text-3xl;
+      @apply font-bold;
+    }
+    h3 {
+      @apply text-2xl;
+      @apply font-bold;
+    }
+    h4 {
+      @apply text-xl;
+      @apply font-semibold;
+    }
+    h5 {
+      @apply text-lg;
+      @apply font-semibold;
+    }
+    h6 {
+      @apply text-sm;
+      @apply font-semibold;
+    }
+  }

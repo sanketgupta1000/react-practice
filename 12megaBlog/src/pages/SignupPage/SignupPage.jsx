@@ -9,7 +9,7 @@ function SignupPage()
     return (
 
 
-        <div className="py-4">
+        <div className="py-8 sm:py-9 md:py-10 lg:py-14">
             <Signup />
         </div>
 

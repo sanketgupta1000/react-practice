@@ -32,7 +32,7 @@ function Home()
                     // set loading to false
                     // set posts to store
                     dispatch(setPosts(myPosts.documents))
-                    console.log("inside if")
+                    // console.log("inside if")
                 }
                 // console.log("outside if")
             })
@@ -50,12 +50,12 @@ function Home()
 
             <Container>
 
-                <div className="flex flex-wrap">
+                <div className="masonry sm:masonry-sm md:masonry-md">
 
                     {/* mapping posts and displaying */}
                     {posts.map((post) => 
                         (
-                            <div key={post.$id} className='p-2 w-full sm:w-1/2 md:w-1/3 lg:w-1/4'>
+                            <div key={post.$id} className='p-2 break-inside'>
 
                                 <PostCard {...post} />
 

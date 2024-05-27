@@ -1,7 +1,7 @@
 import React from 'react'
 // importing useSelector to help in conditional rendering based on user logged in or not
 import { useSelector } from 'react-redux'
-import {Link, useNavigate} from "react-router-dom"
+import {Link, NavLink} from "react-router-dom"
 import {LogoutBtn, Container, Logo} from "./../index"
 
 
@@ -9,9 +9,6 @@ function Header() {
 
     // getting access of isLoggedIn
     const isLoggedIn = useSelector((state) => state.userReducer.isLoggedIn)
-
-    //getting access of navigate
-    const navigate = useNavigate()
 
     // creating an array of navItems
     const navItems = [
@@ -47,7 +44,7 @@ function Header() {
     return (
 
 
-        <header className='py-3 shadow bg-gray-500'>
+        <header className='py-3 shadow bg-white'>
 
             <Container>
 
@@ -56,27 +53,27 @@ function Header() {
                     <div className="mr-4">
 
                         <Link to='/'>
-                            <Logo width='70px'/>
+                            <Logo width='50px'/>
                         </Link>
 
                     </div>
 
-                    <ul className='flex ml-auto'>
+                    <ul className='flex ml-auto items-center'>
 
                         {/* conditionally rendering based on active */}
                         {navItems.map((item)=>
                         item.active ?
                         (
-                            <li key={item.title}>
-                                {/* alternative of Link is to use useNavigate, useful to navigate through programming */}
-                                <button
-                                    onClick={()=>{
-                                        navigate(item.path)
-                                    }}
-                                    className='inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'
+                            <li
+                                key={item.title}
+                                className='mx-1'
+                            >
+                                <NavLink
+                                    to={item.path}
+                                    className={({isActive})=>`inline-bock px-6 py-2 duration-200 rounded-full ${isActive? "bg-blue-100 text-blue-700": " hover:bg-blue-100 hover:text-blue-700"}`}
                                 >
                                     {item.title}
-                                </button>
+                                </NavLink>
                             </li>
                         ):
                         null

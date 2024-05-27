@@ -21,7 +21,7 @@ function AuthLayout({children, authentication=true})
     {
         // set loading state
         dispatch(setLoading({loading: true, loadingMsg: "Checking Authentication..."}))
-        console.log("before checking")
+        // console.log("before checking")
         // if authentication is required and user is not logged in
         if(authentication && !isLoggedIn)
         {
@@ -36,11 +36,11 @@ function AuthLayout({children, authentication=true})
             navigate("/")
         }
 
-        console.log("after checking")
+        // console.log("after checking")
         
         // set loading state
         dispatch(setLoading(false, ""))
-        console.log("after checking")
+        // console.log("after checking")
 
     }, [isLoggedIn, navigate])
 

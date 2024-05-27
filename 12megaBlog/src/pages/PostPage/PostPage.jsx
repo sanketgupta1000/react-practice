@@ -58,10 +58,12 @@ export default function Post() {
                 blogService.deleteFile(post.featuredImage);
                 navigate("/");
             }
-        });
+        })
+        .finally(()=>{
+            // remove loading state
+            dispatch(setLoading({loading: false, loadingMsg: ""}));
+        })
 
-        // remove loading state
-        dispatch(setLoading({loading: false, loadingMsg: ""}));
     };
 
     return post ? (
